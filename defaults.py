@@ -61,6 +61,7 @@ class ExperimentConfig:
     remap_color: bool = False  # remap color of the objects on color perturbation
     bmr_samples: int = 2000  # number of samples to use for Bayesian model reduction
     bmr_pairs: int = 2000  # number of pairs to use for Bayesian model reduction
+    no_video: bool = False  # skip video and wandb media logging
 
 
 def parse_floats(s):
@@ -279,6 +280,7 @@ def get_defaults(parser):
         help="Global step at which to fire the perturbation.",
     )
     parser.add_argument("--remap_color", action="store_true", required=False)
+    parser.add_argument("--no_video", action="store_true", required=False)
 
     parser.add_argument("--warmup_smm", action="store_true", required=False)
     parser.add_argument("--num_warmup_steps", type=int, default=50)
@@ -530,5 +532,6 @@ def parse_args(args=None):
         remap_color=args.remap_color,
         bmr_samples=args.bmr_samples,
         bmr_pairs=args.bmr_pairs,
+        no_video=args.no_video,
     )
     return config
